@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Моя биография</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        h2 {
+            color: #3498db;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        
+        h3 {
+            color: #2980b9;
+        }
+        
+        img {
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        img:hover {
+            transform: scale(1.02);
+        }
+        
+        a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        a:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        
+        .nav-links a {
+            margin: 0 10px;
+            padding: 8px 15px;
+            background-color: #ecf0f1;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .profile-img {
+            border: 3px solid #3498db;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+        
+        .page {
+            display: none;
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        .city-img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 15px;
+        }
+        
+        /* Стили для таблицы */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        
+
+        
+        tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        .school-link {
+            color: #3498db;
+            font-weight: bold;
+        }
+        
+        .school-link:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
+        
+        /* Новый стиль для фото увлечений */
+        .hobby-img {
+            width: 200px; /* Уменьшили размер вдвое (было ~300px) */
+            height: auto;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Шапка с фото и меню -->
+<div class="header">
+    <h1>Моя биография</h1>
+    <img src="Me.jpg" alt="Мое фото" class="profile-img">
+    <div class="nav-links">
+        <a href="#" onclick="showPage('about')">Обо мне</a>
+        <a href="#" onclick="showPage('birth')">Место рождения</a>
+        <a href="#" onclick="showPage('study')">Образование</a>
+        <a href="#" onclick="showPage('hobby')">Увлечения</a>
+    </div>
+</div>
+
+<!-- Страница "Обо мне" -->
+<div id="about" class="page active">
+    <h2>Обо мне</h2>
+    <p>Привет! Меня зовут Женя. Мне 18 лет. Далее ты можешь узнать обо мне.</p>
+</div>
+
+<!-- Страница "Место рождения" -->
+<div id="birth" class="page">
+    <h2>Место рождения</h2>
+    <p>Я родился в Минске в 2006 году. Я очень люблю этот город. Он невероятно красивый</p>
+    <h3>Фото моего города:</h3>
+    <img src="Minsk.jpg" alt="Минск" class="city-img">
+</div>
+
+<!-- Страница "Образование" -->
+<div id="study" class="page">
+    <h2>Образование</h2>
+    <table>
+        <tr>
+            <th>Годы обучения</th>
+            <th>Учебное заведение</th>
+        </tr>
+        <tr>
+            <td>2013-2024</td>
+            <td>
+                <a href="http://gymn12.minsk.edu.by/" class="school-link" target="_blank">Гимназия №12 г.Минска</a>
+            </td>
+        </tr>
+        <tr>
+            <td>2024-2028</td>
+            <td>
+                <a href="https://fpmi.bsu.by/" class="school-link" target="_blank">БГУ ФПМИ</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<!-- Страница "Увлечения" -->
+<div id="hobby" class="page">
+    <h2>Мои увлечения</h2>
+    <dl>
+        <dt>Программирование</dt>
+        <dd>Люблю создавать небольшие веб-проекты</dd>
+        <dt>Криптовалюта</dt>
+        <dd>Торгую различными монетами на бирже</dd>
+        <dt>Футбол</dt>
+        <dd>Несколько лет занимался в футбольном клубе</dd>
+        <h3>Фото моих хобби:</h3>
+        <img src="hobby.jpg" alt="Увлечения" class="hobby-img">
+    </dl>
+</div>
+
+<script>
+    // Функция для переключения между страницами
+    function showPage(pageId) {
+        // Скрываем все страницы
+        const pages = document.querySelectorAll('.page');
+        pages.forEach(page => {
+            page.classList.remove('active');
+        });
+        
+        // Показываем выбранную страницу
+        document.getElementById(pageId).classList.add('active');
+        
+        // Прокручиваем к верху страницы
+        window.scrollTo({top: 0, behavior: 'smooth'});
+        
+        return false; // Предотвращаем действие ссылки по умолчанию
+    }
+</script>
+
+</body>
+</html>
