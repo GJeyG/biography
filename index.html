@@ -2,229 +2,521 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Моя биография</title>
+    <title>Мир Кактусов - Энциклопедия суккулентов</title>
     <style>
+        /* Общие стили */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+            line-height: 1.8;
             color: #333;
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f9f9f9;
+            background-color: #f5f9f0;
+            background-image: url('cactus-bg.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        
+        /* Шапка сайта */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.92);
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            border: 2px solid #d4edda;
         }
         
         h1 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-            font-size: 2.5em;
+            color: #2e8b57;
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
         
-        h2 {
-            color: #3498db;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
-            margin-top: 30px;
+        .header p {
+            font-size: 1.2em;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
         }
         
-        h3 {
-            color: #2980b9;
+        /* Навигация */
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 30px 0;
         }
-        
-        img {
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        img:hover {
-            transform: scale(1.02);
-        }
-        
-        a {
-            color: #3498db;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        a:hover {
-            color: #2980b9;
-            text-decoration: underline;
-        }
-        
         
         .nav-links a {
-            margin: 0 10px;
-            padding: 8px 15px;
-            background-color: #ecf0f1;
-            border-radius: 5px;
+            padding: 12px 25px;
+            background-color: #2e8b57;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
             transition: all 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
         }
         
         .nav-links a:hover {
-            background-color: #3498db;
-            color: white;
-            text-decoration: none;
-            transform: translateY(-2px);
+            background-color: #3cb371;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
         }
         
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
+        /* Основной контент */
+        .content-section {
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: 35px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            border: 2px solid #d4edda;
         }
         
-        .profile-img {
-            border: 3px solid #3498db;
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
+        h2 {
+            color: #2e8b57;
+            font-size: 2em;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #d4edda;
         }
         
-        .page {
-            display: none;
-            background-color: white;
-            padding: 25px;
-            border-radius: 8px;
-            margin-bottom: 30px;
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.8;
         }
         
-        .active {
-            display: block;
+        /* Улучшенная галерея видео и фото */
+        .media-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
         }
         
-        .city-img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 15px;
+        /* Стиль для строки с 2 элементами */
+        .media-gallery.two-items {
+            grid-template-columns: repeat(2, 1fr);
+            margin-top: 30px;
         }
         
-        /* Стили для таблицы */
-        table {
+        .media-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            background: white;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        
+        .media-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .media-thumbnail-container {
+            position: relative;
             width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-
+            padding-top: 56.25%; /* 16:9 соотношение */
+            overflow: hidden;
         }
         
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
+        .media-thumbnail {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-bottom: 3px solid #2e8b57;
+            transition: transform 0.3s ease;
         }
         
-        th {
-            background-color: #3498db;
+        .media-item:hover .media-thumbnail {
+            transform: scale(1.03);
+        }
+        
+        video.media-thumbnail {
+            background-color: #000;
+        }
+        
+        .media-info {
+            padding: 20px;
+            background: white;
+        }
+        
+        .media-title {
+            color: #2e8b57;
+            font-weight: 600;
+            font-size: 1.2em;
+            margin: 0 0 10px 0;
+        }
+        
+        .media-description {
+            color: #555;
+            font-size: 0.95em;
+            margin: 0;
+        }
+        
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(46, 139, 87, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .media-item.video:hover .play-icon,
+        .media-item.photo-with-video:hover .play-icon {
+            opacity: 1;
+        }
+        
+        .play-icon::after {
+            content: "";
+            display: block;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 25px solid white;
+            margin-left: 5px;
+        }
+        
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            width: 80%;
+            max-width: 800px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .modal-video {
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            position: relative;
+        }
+        
+        .modal-video video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
             color: white;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1001;
+        }
+        
+        /* Дополнительные разделы */
+        .cactus-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .type-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e0f0e5;
+        }
+        
+        .type-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .type-card h3 {
+            color: #2e8b57;
+            margin-top: 0;
+            border-bottom: 1px dashed #c8e6c9;
+            padding-bottom: 10px;
         }
         
 
         
-        tr:hover {
-            background-color: #e3f2fd;
-        }
-        
-        .school-link {
-            color: #3498db;
-            font-weight: bold;
-        }
-        
-        .school-link:hover {
-            color: #2980b9;
-            text-decoration: underline;
-        }
-        
-        /* Новый стиль для фото увлечений */
-        .hobby-img {
-            width: 200px; /* Уменьшили размер вдвое (было ~300px) */
-            height: auto;
-            margin-top: 10px;
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .media-gallery,
+            .media-gallery.two-items {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2em;
+            }
+            
+            .header p {
+                font-size: 1em;
+            }
+            
+            .modal-content {
+                width: 95%;
+            }
         }
     </style>
 </head>
 <body>
-
-<!-- Шапка с фото и меню -->
-<div class="header">
-    <h1>Моя биография</h1>
-    <img src="Me.jpg" alt="Мое фото" class="profile-img">
-    <div class="nav-links">
-        <a href="#" onclick="showPage('about')">Обо мне</a>
-        <a href="#" onclick="showPage('birth')">Место рождения</a>
-        <a href="#" onclick="showPage('study')">Образование</a>
-        <a href="#" onclick="showPage('hobby')">Увлечения</a>
+    <!-- Шапка сайта -->
+    <div class="header">
+        <h1>Мир Кактусов</h1>
+        <p>Исследуйте удивительный мир этих уникальных растений - от пустынных гигантов до миниатюрных домашних любимцев.</p>
+        
+        <div class="nav-links">
+            <a href="#about">О проекте</a>
+            <a href="#gallery">Медиагалерея</a>
+            <a href="#types">Виды кактусов</a>
+            <a href="#care">Уход</a>
+        </div>
     </div>
-</div>
-
-<!-- Страница "Обо мне" -->
-<div id="about" class="page active">
-    <h2>Обо мне</h2>
-    <p>Привет! Меня зовут Женя. Мне 18 лет. Далее ты можешь узнать обо мне.</p>
-</div>
-
-<!-- Страница "Место рождения" -->
-<div id="birth" class="page">
-    <h2>Место рождения</h2>
-    <p>Я родился в Минске в 2006 году. Я очень люблю этот город. Он невероятно красивый</p>
-    <h3>Фото моего города:</h3>
-    <img src="Minsk.jpg" alt="Минск" class="city-img">
-</div>
-
-<!-- Страница "Образование" -->
-<div id="study" class="page">
-    <h2>Образование</h2>
-    <table>
-        <tr>
-            <th>Годы обучения</th>
-            <th>Учебное заведение</th>
-        </tr>
-        <tr>
-            <td>2013-2024</td>
-            <td>
-                <a href="http://gymn12.minsk.edu.by/" class="school-link" target="_blank">Гимназия №12 г.Минска</a>
-            </td>
-        </tr>
-        <tr>
-            <td>2024-2028</td>
-            <td>
-                <a href="https://fpmi.bsu.by/" class="school-link" target="_blank">БГУ ФПМИ</a>
-            </td>
-        </tr>
-    </table>
-</div>
-
-<!-- Страница "Увлечения" -->
-<div id="hobby" class="page">
-    <h2>Мои увлечения</h2>
-    <dl>
-        <dt>Программирование</dt>
-        <dd>Люблю создавать небольшие веб-проекты</dd>
-        <dt>Криптовалюта</dt>
-        <dd>Торгую различными монетами на бирже</dd>
-        <dt>Футбол</dt>
-        <dd>Несколько лет занимался в футбольном клубе</dd>
-        <h3>Фото моих хобби:</h3>
-        <img src="hobby.jpg" alt="Увлечения" class="hobby-img">
-    </dl>
-</div>
-
-<script>
-    // Функция для переключения между страницами
-    function showPage(pageId) {
-        // Скрываем все страницы
-        const pages = document.querySelectorAll('.page');
-        pages.forEach(page => {
-            page.classList.remove('active');
-        });
+    
+    <!-- О проекте -->
+    <div id="about" class="content-section">
+        <h2>О проекте</h2>
+        <p>Добро пожаловать на ресурс, посвященный кактусам и другим суккулентам! Проект создан для всех, кто интересуется этими удивительными растениями.</p>
         
-        // Показываем выбранную страницу
-        document.getElementById(pageId).classList.add('active');
+        <p>Кактусы - это не просто колючие растения пустынь. Они обладают уникальной способностью выживать в экстремальных условиях, имеют невероятные формы и поражают воображение своими цветами. На сайте вы найдете:</p>
         
-        // Прокручиваем к верху страницы
-        window.scrollTo({top: 0, behavior: 'smooth'});
+        <ul>
+            <li>Энциклопедию видов</li>
+            <li>Практические руководства по уходу</li>
+            <li>Фото- и видеоматериалы о жизни кактусов в природе</li>
+            <li>Информацию о редких и исчезающих видах</li>
+        </ul>
+    </div>
+    
+    <!-- Медиагалерея -->
+    <div id="gallery" class="content-section">
+        <h2>Медиагалерея</h2>
+        <p>Погрузитесь в мир кактусов через фото- и видеоматериалы. Нажмите на изображения для просмотра.</p>
         
-        return false; // Предотвращаем действие ссылки по умолчанию
-    }
-</script>
+        <!-- Первая строка - 3 элемента -->
+        <div class="media-gallery">
+                    <div class="media-item">
+                <div class="media-thumbnail-container">
+                    <img src="композиция.jpg" alt="Миниатюрные кактусы" class="media-thumbnail">
+                </div>
+                <div class="media-info">
+                    <h3 class="media-title">Мини-коллекция</h3>
+                    <p class="media-description">Композиция из миниатюрных кактусов - идеально для небольших пространств</p>
+                </div>
+            </div>
+            
+            <!-- Фото 1 (с видео по клику) -->
+            <div class="media-item photo-with-video" onclick="openModal('bloom-video')">
+                <div class="media-thumbnail-container">
+                    <img src="цветение кактуса.jpg" alt="Редкие виды кактусов" class="media-thumbnail">
+                    <div class="play-icon"></div>
+                </div>
+                <div class="media-info">
+                    <h3 class="media-title">Редкие виды кактусов</h3>
+                    <p class="media-description">Нажмите, чтобы посмотреть видео</p>
+                </div>
+            </div>
+            
+            <!-- Видео 2 -->
+            <div class="media-item video">
+                <div class="media-thumbnail-container">
+                    <video class="media-thumbnail" controls poster="preview-image.jpg">
+                        <source src="IMG_7625.MP4" type="video/mp4">
+                        Ваш браузер не поддерживает видео.
+                    </video>
+                    <div class="play-icon"></div>
+                </div>
+                <div class="media-info">
+                    <h3 class="media-title">Видео обрезки кактуса</h3>
+                    <p class="media-description">ASMR cactus cutting</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Вторая строка - 2 элемента -->
+        <div class="media-gallery two-items">
+            <!-- Фото 2 -->
+            <div class="media-item">
+                <div class="media-thumbnail-container">
+                    <img src="редкий.webp" alt="Редкий вид кактуса" class="media-thumbnail">
+                </div>
+                <div class="media-info">
+                    <h3 class="media-title">Редкий экземпляр</h3>
+                    <p class="media-description">Фото редкого вида кактуса из частной коллекции</p>
+                </div>
+            </div>
+            
+            <!-- Фото 3 -->
+            <div class="media-item">
+                <div class="media-thumbnail-container">
+                    <img src="креатив.jpg" alt="Кактусы в интерьере" class="media-thumbnail">
+                </div>
+                <div class="media-info">
+                    <h3 class="media-title">Кактусы в дизайне</h3>
+                    <p class="media-description">Креативное использование кактусов в современном интерьере</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Модальное окно для видео цветения -->
+    <div id="bloom-video" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="modal-video">
+                <video controls autoplay>
+                    <source src="2025-07-06 21.29.23.mp4" type="video/mp4">
+                    Ваш браузер не поддерживает видео.
+                </video>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Виды кактусов -->
+    <div id="types" class="content-section">
+        <h2>Популярные виды кактусов</h2>
+        <p>Кактусы поражают своим разнообразием. Вот некоторые из самых популярных видов, которые можно выращивать дома:</p>
+        
+        <div class="cactus-types">
+            <!-- Вид 1 -->
+            <div class="type-card">
+                <h3>Эхинопсис</h3>
+                <p>Один из самых распространенных домашних кактусов. Отличается шаровидной формой и крупными ночными цветами. Идеален для начинающих.</p>
+            </div>
+            
+            <!-- Вид 2 -->
+            <div class="type-card">
+                <h3>Опунция</h3>
+                <p>Узнаваема по плоским сегментам-лепешкам. Некоторые виды съедобны. Требует много света и мало воды.</p>
+            </div>
+            
+            <!-- Вид 3 -->
+            <div class="type-card">
+                <h3>Маммилярия</h3>
+                <p>Небольшие кактусы с характерными сосочками. Цветут красивыми венками. Любят рыхлую почву.</p>
+            </div>
+            
+            <!-- Вид 4 -->
+            <div class="type-card">
+                <h3>Цереус</h3>
+                <p>Колонновидные кактусы, могут достигать больших размеров. Ночное цветение с сильным ароматом.</p>
+            </div>
+            
+            <!-- Вид 5 -->
+            <div class="type-card">
+                <h3>Астрофитум</h3>
+                <p>Элитные кактусы с геометрически правильными ребрами. Медленно растут, но очень декоративны.</p>
+            </div>
+            
+            <!-- Вид 6 -->
+            <div class="type-card">
+                <h3>Гимнокалициум</h3>
+                <p>Неприхотливые кактусы с яркими цветами. Подходят для начинающих коллекционеров.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Уход -->
+    <div id="care" class="content-section">
+        <h2>Основы ухода за кактусами</h2>
+        <p>Хотя кактусы считаются неприхотливыми растениями, правильный уход позволит им расти здоровыми и цвести:</p>
+        
+        <h3>Освещение</h3>
+        <p>Большинство кактусов нуждаются в ярком свете. Южные окна - идеальное место. Зимой может потребоваться досветка.</p>
+        
+        <h3>Полив</h3>
+        <p>Основное правило: лучше недолить, чем перелить. Летом полив 1-2 раза в неделю, зимой - 1-2 раза в месяц.</p>
+        
+        <h3>Температура</h3>
+        <p>Летом выдерживают до +40°C, зимой нужна прохлада (+10-15°C) для периода покоя.</p>
+        
+        <h3>Почва</h3>
+        <p>Должна быть рыхлой и хорошо дренированной. Подойдет специальный грунт для кактусов с добавлением песка.</p>
+        
+        <h3>Подкормки</h3>
+        <p>Только в период активного роста (весна-лето) специальными удобрениями для кактусов.</p>
+        
+        <h3>Пересадка</h3>
+        <p>Молодые растения - ежегодно, взрослые - раз в 2-3 года. Лучшее время - ранняя весна.</p>
+    </div>
+    
 
+
+    <script>
+        // Функции для работы с модальным окном
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Запрещаем прокрутку страницы
+        }
+        
+        function closeModal() {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                modal.style.display = 'none';
+                // Останавливаем все видео в модальных окнах
+                const videos = modal.querySelectorAll('video');
+                videos.forEach(video => {
+                    video.pause();
+                    video.currentTime = 0;
+                });
+            });
+            document.body.style.overflow = 'auto'; // Возвращаем прокрутку страницы
+        }
+        
+        // Закрытие модального окна при клике вне его
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                closeModal();
+            }
+        }
+    </script>
 </body>
 </html>
